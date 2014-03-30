@@ -1,0 +1,9 @@
+{
+  "name": "google-unredirect",
+  "title": "No More Blogger Redirect",
+  "id": "jid1-oCwaAvW4FzkA5w",
+  "description": "Disables Blogger local domains",
+  "author": "dyeray",
+  "license": "MPL 2.0",
+  "version": "1"
+}

@@ -1,0 +1,1 @@
+This addon captures all the http requests to websites that follow the pattern *blogspot.com.[localdomain]/* and redirects the request to *blogspot.com/ncr/* following Google's documentation on how to avoid loading the local version of a Google website.
