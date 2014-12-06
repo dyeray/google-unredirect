@@ -5,5 +5,12 @@
   "description": "Disables Blogger local domains",
   "author": "dyeray",
   "license": "MPL 2.0",
-  "version": "3"
+  "version": "4",
+  "preferences": [{
+    "description": "Enable this option ONLY if this addon doesn't work for you. It uses a different method compatible with NoScript",
+    "type": "bool",
+    "name": "noScriptEnabled",
+    "value": false,
+    "title": "Enable NoScript compatibility"
+  }]
 }
