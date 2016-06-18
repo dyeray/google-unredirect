@@ -1,16 +1,9 @@
 {
   "name": "google-unredirect",
   "title": "No More Blogger Redirect",
-  "id": "jid1-oCwaAvW4FzkA5w",
+  "id": "jid1-oCwaAvW4FzkA5w@jetpack",
   "description": "Disables Blogger local domains",
   "author": "dyeray",
   "license": "MPL 2.0",
-  "version": "6",
-  "preferences": [{
-    "description": "Uses a method compatible with NoScript ABE",
-    "type": "bool",
-    "name": "noScriptEnabled",
-    "value": true,
-    "title": "Enable NoScript compatibility"
-  }]
+  "version": "7"
 }
