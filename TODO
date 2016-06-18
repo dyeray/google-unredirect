@@ -1,0 +1,4 @@
+- Google unredirection
+- Migrate previous setting namespace to new one
+- Migrate to WebExtensions (maybe using webRequest?)
+- Add new blogger domains to the list

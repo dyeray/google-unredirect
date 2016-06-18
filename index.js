@@ -1,26 +1,23 @@
-const { Cc, Ci, Cr, Cu} = require("chrome");
-const {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
-
-DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr;ie;it;nl;pt;ro;sg;be;no;se";
-AC_DOMAINS = "extensions.no-more-blogger-redirect.domains"
-
 var pageMod = require("sdk/page-mod");
 var data = require("sdk/self").data;
-var about_config = require("sdk/preferences/service")
+var preferences = require("sdk/preferences/service");
+var simple_prefs = require("sdk/simple-prefs");
+
+DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr;ie;it;nl;pt;ro;sg;be;no;se";
+//AC_DOMAINS = "extensions.no-more-blogger-redirect.domains";
+AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
+
 var redirected_domains = [];
 
 
-function onDomainsUpdated(subject, topic, data) {
-    if (!(subject instanceof Ci.nsIPrefBranch)) {
-        return;
-    }
+function onDomainsUpdated() {
     generateDomainLists();
     registerRedirectFunction();
 }
 
 
 function generateDomainLists() {
-    var domains = about_config.get(AC_DOMAINS, DEFAULT_DOMAINS).split(";");
+    var domains = preferences.get(AC_DOMAINS, DEFAULT_DOMAINS).split(";");
     redirected_domains = [];
     for (var i = 0; i < domains.length; i++) {
         redirected_domains.push("*.blogspot." + domains[i]);
@@ -29,14 +26,16 @@ function generateDomainLists() {
 
 function setAboutConfig() {
     // Set default about:config value if it doesn't exist
-    if (!about_config.has(AC_DOMAINS)) {
-        about_config.set(AC_DOMAINS, DEFAULT_DOMAINS);
+    if (!preferences.has(AC_DOMAINS)) {
+        preferences.set(AC_DOMAINS, DEFAULT_DOMAINS);
     }
-    domains_branch = Services.prefs.getBranch(AC_DOMAINS);
-    domains_branch.addObserver("", onDomainsUpdated, false);
+    simple_prefs.on("domains", onDomainsUpdated);
 }
 
 function registerRedirectFunction() {
+    if (typeof pm !== 'undefined') {
+      pm.destroy();
+    }
     pm = pageMod.PageMod({
         contentScriptWhen: 'start',
         include: redirected_domains,
@@ -51,5 +50,5 @@ exports.main = function() {
 };
 
 exports.onUnload = function() {
-    domains_branch.removeObserver("", onDomainsUpdated);
+    simple_prefs.removeListener("domains", onDomainsUpdated);
 };
