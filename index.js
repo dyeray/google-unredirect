@@ -7,21 +7,20 @@ DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr
 //AC_DOMAINS = "extensions.no-more-blogger-redirect.domains";
 AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
 
-var redirected_domains = [];
-
 
 function onDomainsUpdated() {
-    generateDomainLists();
-    registerRedirectFunction();
+    var redirected_domains = generateDomainLists();
+    registerRedirectFunction(redirected_domains);
 }
 
 
 function generateDomainLists() {
     var domains = preferences.get(AC_DOMAINS, DEFAULT_DOMAINS).split(";");
-    redirected_domains = [];
+    var redirected_domains = [];
     for (var i = 0; i < domains.length; i++) {
         redirected_domains.push("*.blogspot." + domains[i]);
     }
+    return redirected_domains;
 }
 
 function setAboutConfig() {
@@ -32,7 +31,7 @@ function setAboutConfig() {
     simple_prefs.on("domains", onDomainsUpdated);
 }
 
-function registerRedirectFunction() {
+function registerRedirectFunction(redirected_domains) {
     if (typeof pm !== 'undefined') {
       pm.destroy();
     }
@@ -45,8 +44,8 @@ function registerRedirectFunction() {
 
 exports.main = function() {
     setAboutConfig(); // Create settings in about config and configure listener in case settings are changed.
-    generateDomainLists();    // Generate in ram the lists of domains to redirect from the settings.
-    registerRedirectFunction();   // Register the function that is going to do the redirect (it depends on what method has been selected).
+    var redirected_domains = generateDomainLists();    // Generate in ram the lists of domains to redirect from the settings.
+    registerRedirectFunction(redirected_domains);   // Register the function that is going to do the redirect (it depends on what method has been selected).
 };
 
 exports.onUnload = function() {
