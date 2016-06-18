@@ -4,7 +4,6 @@ var preferences = require("sdk/preferences/service");
 var simple_prefs = require("sdk/simple-prefs");
 
 DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr;ie;it;nl;pt;ro;sg;be;no;se";
-//AC_DOMAINS = "extensions.no-more-blogger-redirect.domains";
 AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
 
 
