@@ -5,6 +5,8 @@ var simple_prefs = require("sdk/simple-prefs");
 
 DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr;ie;it;nl;pt;ro;sg;be;no;se";
 AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
+REDIRECT_BLOGGER = "extensions.google-unredirect@dyeray.redirect_blogger";
+REDIRECT_GOOGLE = "extensions.google-unredirect@dyeray.redirect_google";
 
 
 function onDomainsUpdated() {
@@ -22,12 +24,11 @@ function generateDomainLists() {
   return redirected_domains;
 }
 
-function setAboutConfig() {
+function setAboutConfig(key, value) {
   // Set default about:config value if it doesn't exist
-  if (!preferences.has(AC_DOMAINS)) {
-    preferences.set(AC_DOMAINS, DEFAULT_DOMAINS);
+  if (!preferences.has(key)) {
+    preferences.set(key, value);
   }
-  simple_prefs.on("domains", onDomainsUpdated);
 }
 
 function registerRedirectFunction(redirected_domains) {
@@ -42,9 +43,12 @@ function registerRedirectFunction(redirected_domains) {
 }
 
 exports.main = function() {
-  setAboutConfig(); // Create settings in about config and configure listener in case settings are changed.
-  var redirected_domains = generateDomainLists();    // Generate in ram the lists of domains to redirect from the settings.
-  registerRedirectFunction(redirected_domains);   // Register the function that is going to do the redirect (it depends on what method has been selected).
+  setAboutConfig(AC_DOMAINS, DEFAULT_DOMAINS); // Create settings in about config and configure listener in case settings are changed.
+  setAboutConfig(REDIRECT_BLOGGER, true); // If we allow to unredirect Google in the future, we may need to disable blogger unredirection.
+  setAboutConfig(REDIRECT_GOOGLE, false); // For current users, we disable Google unredirection for the future.
+  simple_prefs.on("domains", onDomainsUpdated);
+  var redirected_domains = generateDomainLists();    // Generate the list of domains to redirect.
+  registerRedirectFunction(redirected_domains);   // Register the redirect function.
 };
 
 exports.onUnload = function() {
