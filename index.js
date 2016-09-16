@@ -3,7 +3,7 @@ var data = require("sdk/self").data;
 var preferences = require("sdk/preferences/service");
 var simple_prefs = require("sdk/simple-prefs");
 
-DEFAULT_DOMAINS = "ca;co.uk;com.ar;com.au;com.br;com.es;com.tr;de;gr;in;mx;ch;fr;ie;it;nl;pt;ro;sg;be;no;se";
+DEFAULT_DOMAINS = "al;am;ba;be;bg;ca;ch;co.id;co.uk;co.za;com.ar;com.au;com.br;com.by;com.co;com.cy;com.ee;com.eg;com.es;com.mt;com.ng;com.tr;com.uy;de;fr;gr;hr;ie;in;is;it;li;lt;lu;md;mk;mx;my;nl;no;pe;pt;qa;ro;rs;se;sg;si;sn;ug";
 AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
 REDIRECT_BLOGGER = "extensions.google-unredirect@dyeray.redirect_blogger";
 REDIRECT_GOOGLE = "extensions.google-unredirect@dyeray.redirect_google";
