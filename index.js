@@ -4,9 +4,9 @@ var preferences = require("sdk/preferences/service");
 var simple_prefs = require("sdk/simple-prefs");
 
 DEFAULT_DOMAINS = "al;am;ba;be;bg;ca;ch;co.id;co.uk;co.za;com.ar;com.au;com.br;com.by;com.co;com.cy;com.ee;com.eg;com.es;com.mt;com.ng;com.tr;com.uy;de;fr;gr;hr;ie;in;is;it;li;lt;lu;md;mk;mx;my;nl;no;pe;pt;qa;ro;rs;se;sg;si;sn;ug";
-AC_DOMAINS = "extensions.google-unredirect@dyeray.domains";
-REDIRECT_BLOGGER = "extensions.google-unredirect@dyeray.redirect_blogger";
-REDIRECT_GOOGLE = "extensions.google-unredirect@dyeray.redirect_google";
+AC_DOMAINS = "extensions.jid1-oCwaAvW4FzkA5w@jetpack.domains";
+REDIRECT_BLOGGER = "extensions.jid1-oCwaAvW4FzkA5w@jetpack.redirect_blogger";
+REDIRECT_GOOGLE = "extensions.jid1-oCwaAvW4FzkA5w@jetpack.redirect_google";
 
 
 function onDomainsUpdated() {
